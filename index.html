@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Resume — Shashikanth" />
+  <title>Shashikanth — Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page">
+    <header class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">Resume</p>
+        <h1 class="name">Shashikanth</h1>
+        <p class="tagline">Your professional headline — e.g. Software Engineer, Consultant, Analyst</p>
+        <ul class="contact" aria-label="Contact">
+          <li><a href="mailto:you@example.com">you@example.com</a></li>
+          <li><a href="https://www.linkedin.com/in/yourprofile" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><span>City, Country</span></li>
+        </ul>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="section" aria-labelledby="summary-heading">
+        <h2 id="summary-heading">Summary</h2>
+        <p class="prose">
+          Brief overview of your strengths, years of experience, and what you are looking for next. Replace this paragraph with two to four sentences about your background and goals.
+        </p>
+      </section>
+
+      <section class="section" aria-labelledby="experience-heading">
+        <h2 id="experience-heading">Experience</h2>
+        <ol class="timeline">
+          <li>
+            <article class="card">
+              <div class="card-head">
+                <h3>Job Title</h3>
+                <p class="meta">Company Name · City · <time datetime="2020-01">Jan 2020</time> – Present</p>
+              </div>
+              <ul class="bullets">
+                <li>Impact-focused bullet: what you did, how you measured it, and the outcome.</li>
+                <li>Another achievement with strong verbs (led, built, improved, delivered).</li>
+                <li>Optional third bullet for scope, team size, or technologies.</li>
+              </ul>
+            </article>
+          </li>
+          <li>
+            <article class="card">
+              <div class="card-head">
+                <h3>Previous Role</h3>
+                <p class="meta">Organization · <time datetime="2017-06">Jun 2017</time> – <time datetime="2019-12">Dec 2019</time></p>
+              </div>
+              <ul class="bullets">
+                <li>Describe responsibilities and wins relevant to roles you want next.</li>
+                <li>Mention tools, domains, or methodologies you used.</li>
+              </ul>
+            </article>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section two-col" aria-labelledby="skills-heading">
+        <div>
+          <h2 id="skills-heading">Skills</h2>
+          <ul class="chips" aria-label="Technical and professional skills">
+            <li>Skill one</li>
+            <li>Skill two</li>
+            <li>Skill three</li>
+            <li>Skill four</li>
+            <li>Skill five</li>
+          </ul>
+        </div>
+        <div>
+          <h2 id="education-heading">Education</h2>
+          <article class="card flat">
+            <h3>Degree or certification</h3>
+            <p class="meta">Institution · Year</p>
+            <p class="prose small">Honors, coursework, or thesis — optional.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© <span id="y"></span> Shashikanth. Static page — edit <code>index.html</code> to update.</p>
+    </footer>
+  </div>
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

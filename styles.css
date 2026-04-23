@@ -1,0 +1,247 @@
+:root {
+  --bg: #f6f4ef;
+  --surface: #fffdf8;
+  --ink: #1a1c1e;
+  --muted: #5c6167;
+  --accent: #0d5c63;
+  --accent-soft: rgba(13, 92, 99, 0.12);
+  --border: rgba(26, 28, 30, 0.08);
+  --radius: 14px;
+  --shadow: 0 18px 50px rgba(26, 28, 30, 0.07);
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--bg);
+  font-optical-sizing: auto;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  z-index: 100;
+  border-radius: 8px;
+}
+
+.page {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 3rem;
+}
+
+.hero {
+  background: linear-gradient(145deg, var(--surface) 0%, #f0ebe3 100%);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) + 6px);
+  box-shadow: var(--shadow);
+  padding: 2.25rem 2rem;
+  margin-bottom: 2.25rem;
+}
+
+@media (min-width: 640px) {
+  .hero {
+    padding: 2.75rem 2.5rem;
+  }
+}
+
+.hero-inner {
+  max-width: 40rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.tagline {
+  margin: 0.85rem 0 0;
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 36ch;
+}
+
+.contact {
+  list-style: none;
+  margin: 1.35rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  font-size: 0.95rem;
+}
+
+.contact a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+}
+
+.contact a:hover {
+  border-bottom-color: var(--accent-soft);
+}
+
+.contact span {
+  color: var(--muted);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+
+.section h2 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.prose {
+  margin: 0;
+  color: var(--muted);
+}
+
+.prose.small {
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.35rem 1.35rem 1.15rem;
+  box-shadow: 0 4px 20px rgba(26, 28, 30, 0.04);
+}
+
+.card.flat {
+  box-shadow: none;
+}
+
+.card-head h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.meta {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.bullets {
+  margin: 0.85rem 0 0;
+  padding-left: 1.15rem;
+  color: var(--muted);
+}
+
+.bullets li {
+  margin-bottom: 0.35rem;
+}
+
+.bullets li:last-child {
+  margin-bottom: 0;
+}
+
+.two-col {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 720px) {
+  .two-col {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+}
+
+.chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chips li {
+  padding: 0.35rem 0.75rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.footer code {
+  font-size: 0.82em;
+  background: rgba(26, 28, 30, 0.06);
+  padding: 0.12em 0.35em;
+  border-radius: 4px;
+}
