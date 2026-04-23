@@ -14,17 +14,66 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="page">
     <header class="hero">
-      <div class="hero-inner">
-        <p class="eyebrow">Resume</p>
-        <h1 class="name">Shashikanth</h1>
-        <p class="tagline">Your professional headline — e.g. Software Engineer, Consultant, Analyst</p>
-        <ul class="contact" aria-label="Contact">
-          <li><a href="mailto:you@example.com">you@example.com</a></li>
-          <li><a href="https://www.linkedin.com/in/yourprofile" rel="noopener noreferrer">LinkedIn</a></li>
-          <li><span>City, Country</span></li>
-        </ul>
+      <div class="hero-top">
+        <figure class="avatar" aria-label="Profile photo">
+          <img id="profile-photo" class="avatar-img" alt="" width="128" height="128" hidden />
+          <div id="profile-photo-placeholder" class="avatar-placeholder" aria-hidden="true">
+            <span class="avatar-placeholder-text">Your photo</span>
+          </div>
+        </figure>
+        <div class="hero-inner">
+          <p class="eyebrow">Resume</p>
+          <h1 class="name">Shashikanth</h1>
+          <p class="tagline">Your professional headline — e.g. Software Engineer, Consultant, Analyst</p>
+          <ul class="contact" aria-label="Contact">
+            <li><a href="mailto:you@example.com">you@example.com</a></li>
+            <li><a href="https://www.linkedin.com/in/yourprofile" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><span>City, Country</span></li>
+          </ul>
+        </div>
       </div>
     </header>
+
+    <section class="section personalize" aria-labelledby="personalize-heading">
+      <div class="card personalize-card">
+        <div class="personalize-head">
+          <h2 id="personalize-heading">Your photo &amp; resume file</h2>
+          <p class="prose small privacy-note">
+            Uploads stay in <strong>this browser only</strong> (IndexedDB). They are not uploaded to GitHub or any server, so other visitors will not see your files. For a resume everyone can see, edit <code>index.html</code> or attach a PDF in the repo.
+          </p>
+        </div>
+        <div class="personalize-grid">
+          <div class="upload-block">
+            <h3 class="upload-title">Profile photo</h3>
+            <p class="prose small">PNG, JPG, or WebP — up to about 4 MB.</p>
+            <div class="upload-row">
+              <input class="visually-hidden" id="photo-input" type="file" accept="image/*" />
+              <label class="btn btn-primary" for="photo-input">Choose image</label>
+              <button type="button" class="btn btn-ghost" id="clear-photo">Remove</button>
+            </div>
+            <p class="status-line" id="photo-status" role="status" aria-live="polite"></p>
+          </div>
+          <div class="upload-block">
+            <h3 class="upload-title">Resume file</h3>
+            <p class="prose small">PDF recommended for preview. Word documents can be saved and downloaded.</p>
+            <div class="upload-row">
+              <input class="visually-hidden" id="resume-input" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+              <label class="btn btn-primary" for="resume-input">Choose file</label>
+              <button type="button" class="btn btn-ghost" id="clear-resume">Remove</button>
+            </div>
+            <p class="status-line" id="resume-status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+        <div id="resume-preview-wrap" class="resume-preview-wrap" hidden>
+          <h3 class="upload-title resume-preview-title">Your uploaded resume</h3>
+          <iframe id="resume-frame" class="resume-frame" title="Resume PDF preview" hidden></iframe>
+          <div id="resume-toolbar" class="resume-toolbar" hidden>
+            <a id="resume-open-tab" class="btn btn-ghost" href="#" target="_blank" rel="noopener noreferrer">Open in new tab</a>
+            <a id="resume-file-link" class="btn btn-primary" href="#" download>Download</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <main id="main">
       <section class="section" aria-labelledby="summary-heading">
@@ -88,11 +137,12 @@
     </main>
 
     <footer class="footer">
-      <p>© <span id="y"></span> Shashikanth. Static page — edit <code>index.html</code> to update.</p>
+      <p>© <span id="y"></span> Shashikanth. Edit <code>index.html</code> for a public resume; use the panel above for a private copy on this device.</p>
     </footer>
   </div>
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
   </script>
+  <script src="app.js" defer></script>
 </body>
 </html>
