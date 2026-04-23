@@ -7,6 +7,8 @@ on:
       - "index.html"
       - "styles.css"
       - "app.js"
+      - "content.js"
+      - "CNAME"
       - ".github/workflows/deploy-resume-pages.yml"
   workflow_dispatch:
 
@@ -32,7 +34,7 @@ jobs:
       - name: Prepare site artifact
         run: |
           mkdir -p _site
-          cp index.html styles.css app.js _site/
+          cp index.html styles.css app.js content.js CNAME _site/
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

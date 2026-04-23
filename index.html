@@ -23,12 +23,12 @@
         </figure>
         <div class="hero-inner">
           <p class="eyebrow">Resume</p>
-          <h1 class="name">Shashikanth</h1>
-          <p class="tagline">Your professional headline — e.g. Software Engineer, Consultant, Analyst</p>
+          <h1 class="name" id="display-name">Shashikanth</h1>
+          <p class="tagline" id="field-tagline">Your professional headline — e.g. Software Engineer, Consultant, Analyst</p>
           <ul class="contact" aria-label="Contact">
-            <li><a href="mailto:you@example.com">you@example.com</a></li>
-            <li><a href="https://www.linkedin.com/in/yourprofile" rel="noopener noreferrer">LinkedIn</a></li>
-            <li><span>City, Country</span></li>
+            <li><a id="contact-email" href="mailto:you@example.com">you@example.com</a></li>
+            <li><a id="contact-linkedin" href="https://www.linkedin.com/in/yourprofile" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><span id="contact-location">City, Country</span></li>
           </ul>
         </div>
       </div>
@@ -39,7 +39,7 @@
         <div class="personalize-head">
           <h2 id="personalize-heading">Your photo &amp; resume file</h2>
           <p class="prose small privacy-note">
-            Uploads stay in <strong>this browser only</strong> (IndexedDB). They are not uploaded to GitHub or any server, so other visitors will not see your files. For a resume everyone can see, edit <code>index.html</code> or attach a PDF in the repo.
+            Uploads stay in <strong>this browser only</strong> (IndexedDB). They are not sent to GitHub. For a resume everyone sees on the web, edit the HTML in the repo or use the text editor below (also stored per browser unless you copy values into <code>index.html</code>).
           </p>
         </div>
         <div class="personalize-grid">
@@ -75,10 +75,124 @@
       </div>
     </section>
 
+    <section class="section setup-section" aria-labelledby="setup-summary">
+      <details class="card setup-card" id="editor-details">
+        <summary class="setup-summary" id="setup-summary">Custom domain + one-time resume text editor</summary>
+        <div class="setup-body">
+          <div class="domain-block">
+            <h3 class="upload-title">Use <span class="mono">shashikanthresume.com</span></h3>
+            <p class="prose small">
+              Register the domain at any registrar, then point DNS to GitHub Pages. This repo already includes a <code class="mono">CNAME</code> file for <strong>shashikanthresume.com</strong>. In GitHub: <strong>Settings → Pages → Custom domain</strong>, enter the same hostname and save (HTTPS will be provisioned).
+            </p>
+            <p class="prose small">For the <strong>apex</strong> domain (no <code>www</code>), create these <strong>A</strong> records at your DNS host (see <a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain" rel="noopener noreferrer">GitHub’s apex domain guide</a>):</p>
+            <ul class="dns-list mono" aria-label="GitHub Pages A records">
+              <li>185.199.108.153</li>
+              <li>185.199.109.153</li>
+              <li>185.199.110.153</li>
+              <li>185.199.111.153</li>
+            </ul>
+            <p class="prose small">If you prefer <strong>www</strong>, use a <strong>CNAME</strong> from <code class="mono">www</code> to <code class="mono">&lt;your-username&gt;.github.io</code> and put <code class="mono">www.shashikanthresume.com</code> in Pages + update the <code class="mono">CNAME</code> file to match.</p>
+          </div>
+
+          <hr class="setup-divider" />
+
+          <div class="editor-block">
+            <h3 class="upload-title">Edit resume text (saved on this device)</h3>
+            <p class="prose small">Fill in once and click <strong>Save text</strong>. Overrides load automatically when you revisit from the same browser. Use <strong>Clear saved text &amp; reload</strong> to restore the template from the site files.</p>
+            <form id="editor-form" class="editor-form">
+              <div class="editor-grid">
+                <label class="field">
+                  <span class="field-label">Name (large heading)</span>
+                  <input id="inp-display-name" type="text" autocomplete="name" />
+                </label>
+                <label class="field">
+                  <span class="field-label">Browser tab title</span>
+                  <input id="inp-page-title" type="text" placeholder="Shashikanth — Resume" />
+                </label>
+                <label class="field field-span2">
+                  <span class="field-label">Professional headline</span>
+                  <input id="inp-tagline" type="text" />
+                </label>
+                <label class="field">
+                  <span class="field-label">Email address</span>
+                  <input id="inp-email" type="email" autocomplete="email" />
+                </label>
+                <label class="field">
+                  <span class="field-label">Email label (visible text)</span>
+                  <input id="inp-email-label" type="text" />
+                </label>
+                <label class="field">
+                  <span class="field-label">LinkedIn URL</span>
+                  <input id="inp-linkedin" type="url" />
+                </label>
+                <label class="field">
+                  <span class="field-label">LinkedIn label</span>
+                  <input id="inp-linkedin-label" type="text" placeholder="LinkedIn" />
+                </label>
+                <label class="field field-span2">
+                  <span class="field-label">Location</span>
+                  <input id="inp-location" type="text" />
+                </label>
+                <label class="field field-span2">
+                  <span class="field-label">Summary</span>
+                  <textarea id="inp-summary" rows="4"></textarea>
+                </label>
+                <label class="field">
+                  <span class="field-label">Job 1 — title</span>
+                  <input id="inp-exp1-title" type="text" />
+                </label>
+                <label class="field">
+                  <span class="field-label">Job 1 — line (company · dates)</span>
+                  <input id="inp-exp1-meta" type="text" />
+                </label>
+                <label class="field field-span2">
+                  <span class="field-label">Job 1 — bullets (one per line, up to 3)</span>
+                  <textarea id="inp-exp1-bullets" rows="3"></textarea>
+                </label>
+                <label class="field">
+                  <span class="field-label">Job 2 — title</span>
+                  <input id="inp-exp2-title" type="text" />
+                </label>
+                <label class="field">
+                  <span class="field-label">Job 2 — line</span>
+                  <input id="inp-exp2-meta" type="text" />
+                </label>
+                <label class="field field-span2">
+                  <span class="field-label">Job 2 — bullets (one per line, up to 3)</span>
+                  <textarea id="inp-exp2-bullets" rows="3"></textarea>
+                </label>
+                <label class="field field-span2">
+                  <span class="field-label">Skills (comma or newline separated)</span>
+                  <textarea id="inp-skills" rows="3"></textarea>
+                </label>
+                <label class="field">
+                  <span class="field-label">Education — title</span>
+                  <input id="inp-edu-title" type="text" />
+                </label>
+                <label class="field">
+                  <span class="field-label">Education — line</span>
+                  <input id="inp-edu-meta" type="text" />
+                </label>
+                <label class="field field-span2">
+                  <span class="field-label">Education — note</span>
+                  <textarea id="inp-edu-note" rows="2"></textarea>
+                </label>
+              </div>
+              <div class="upload-row editor-actions">
+                <button type="button" class="btn btn-primary" id="editor-save">Save text</button>
+                <button type="button" class="btn btn-ghost" id="editor-clear">Clear saved text &amp; reload</button>
+              </div>
+              <p class="status-line" id="editor-status" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </details>
+    </section>
+
     <main id="main">
       <section class="section" aria-labelledby="summary-heading">
         <h2 id="summary-heading">Summary</h2>
-        <p class="prose">
+        <p class="prose" id="field-summary">
           Brief overview of your strengths, years of experience, and what you are looking for next. Replace this paragraph with two to four sentences about your background and goals.
         </p>
       </section>
@@ -89,10 +203,10 @@
           <li>
             <article class="card">
               <div class="card-head">
-                <h3>Job Title</h3>
-                <p class="meta">Company Name · City · <time datetime="2020-01">Jan 2020</time> – Present</p>
+                <h3 id="exp1-title">Job Title</h3>
+                <p class="meta" id="exp1-meta">Company Name · City · <time datetime="2020-01">Jan 2020</time> – Present</p>
               </div>
-              <ul class="bullets">
+              <ul class="bullets" id="exp1-bullets">
                 <li>Impact-focused bullet: what you did, how you measured it, and the outcome.</li>
                 <li>Another achievement with strong verbs (led, built, improved, delivered).</li>
                 <li>Optional third bullet for scope, team size, or technologies.</li>
@@ -102,12 +216,13 @@
           <li>
             <article class="card">
               <div class="card-head">
-                <h3>Previous Role</h3>
-                <p class="meta">Organization · <time datetime="2017-06">Jun 2017</time> – <time datetime="2019-12">Dec 2019</time></p>
+                <h3 id="exp2-title">Previous Role</h3>
+                <p class="meta" id="exp2-meta">Organization · <time datetime="2017-06">Jun 2017</time> – <time datetime="2019-12">Dec 2019</time></p>
               </div>
-              <ul class="bullets">
+              <ul class="bullets" id="exp2-bullets">
                 <li>Describe responsibilities and wins relevant to roles you want next.</li>
                 <li>Mention tools, domains, or methodologies you used.</li>
+                <li>Optional third bullet.</li>
               </ul>
             </article>
           </li>
@@ -117,7 +232,7 @@
       <section class="section two-col" aria-labelledby="skills-heading">
         <div>
           <h2 id="skills-heading">Skills</h2>
-          <ul class="chips" aria-label="Technical and professional skills">
+          <ul class="chips" id="skills-list" aria-label="Technical and professional skills">
             <li>Skill one</li>
             <li>Skill two</li>
             <li>Skill three</li>
@@ -128,21 +243,22 @@
         <div>
           <h2 id="education-heading">Education</h2>
           <article class="card flat">
-            <h3>Degree or certification</h3>
-            <p class="meta">Institution · Year</p>
-            <p class="prose small">Honors, coursework, or thesis — optional.</p>
+            <h3 id="edu-title">Degree or certification</h3>
+            <p class="meta" id="edu-meta">Institution · Year</p>
+            <p class="prose small" id="edu-note">Honors, coursework, or thesis — optional.</p>
           </article>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <p>© <span id="y"></span> Shashikanth. Edit <code>index.html</code> for a public resume; use the panel above for a private copy on this device.</p>
+      <p>© <span id="y"></span> <span class="footer-name" id="footer-display-name">Shashikanth</span>. Domain: <span class="mono">shashikanthresume.com</span> after DNS setup. This page includes a private editor and uploads for this browser only.</p>
     </footer>
   </div>
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
   </script>
   <script src="app.js" defer></script>
+  <script src="content.js" defer></script>
 </body>
 </html>
