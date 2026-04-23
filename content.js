@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var STORAGE_KEY = "resumeTextOverridesV1";
+  var STORAGE_KEY = "resumeTextOverridesV2";
 
   function $(id) {
     return document.getElementById(id);
@@ -31,16 +31,16 @@
     var b1 = readBullets("exp1-bullets");
     var b2 = readBullets("exp2-bullets");
     var emailEl = $("contact-email");
-    var liEl = $("contact-linkedin");
+    var phoneEl = $("contact-phone");
     return {
-      v: 1,
+      v: 2,
       displayName: $("display-name") ? $("display-name").textContent.trim() : "",
       pageTitle: document.title,
       tagline: $("field-tagline") ? $("field-tagline").textContent.trim() : "",
       email: emailEl ? (emailEl.getAttribute("href") || "").replace(/^mailto:/i, "") : "",
       emailLabel: emailEl ? emailEl.textContent.trim() : "",
-      linkedinUrl: liEl ? liEl.getAttribute("href") || "" : "",
-      linkedinLabel: liEl ? liEl.textContent.trim() : "",
+      phone: phoneEl ? (phoneEl.getAttribute("href") || "").replace(/^tel:/i, "") : "",
+      phoneLabel: phoneEl ? phoneEl.textContent.trim() : "",
       location: $("contact-location") ? $("contact-location").textContent.trim() : "",
       summary: $("field-summary") ? $("field-summary").textContent.trim() : "",
       exp1Title: $("exp1-title") ? $("exp1-title").textContent.trim() : "",
@@ -93,8 +93,23 @@
     }
   }
 
-  function applyData(d) {
-    if (!d || d.v !== 1) return;
+  function migrateRecord(d) {
+    if (!d) return null;
+    if (d.v === 2) return d;
+    if (d.v === 1) {
+      var copy = Object.assign({}, d, { v: 2 });
+      if (!copy.phone && copy.linkedinUrl && /^tel:/i.test(copy.linkedinUrl)) {
+        copy.phone = copy.linkedinUrl.replace(/^tel:/i, "");
+        copy.phoneLabel = copy.linkedinLabel || copy.phone;
+      }
+      return copy;
+    }
+    return null;
+  }
+
+  function applyData(raw) {
+    var d = migrateRecord(raw);
+    if (!d || (d.v !== 1 && d.v !== 2)) return;
 
     var nameEl = $("display-name");
     if (nameEl && d.displayName) nameEl.textContent = d.displayName;
@@ -113,10 +128,10 @@
       if (d.emailLabel != null) emailEl.textContent = d.emailLabel || d.email;
     }
 
-    var liEl = $("contact-linkedin");
-    if (liEl) {
-      if (d.linkedinUrl) liEl.setAttribute("href", d.linkedinUrl);
-      if (d.linkedinLabel != null) liEl.textContent = d.linkedinLabel || "LinkedIn";
+    var phoneEl = $("contact-phone");
+    if (phoneEl) {
+      if (d.phone) phoneEl.setAttribute("href", "tel:" + String(d.phone).replace(/^tel:/i, ""));
+      if (d.phoneLabel != null) phoneEl.textContent = d.phoneLabel || d.phone || "";
     }
 
     var loc = $("contact-location");
@@ -150,6 +165,9 @@
   function loadStored() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        raw = localStorage.getItem("resumeTextOverridesV1");
+      }
       if (!raw) return null;
       return JSON.parse(raw);
     } catch (e) {
@@ -161,7 +179,8 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
   }
 
-  function fillEditorForm(d) {
+  function fillEditorForm(raw) {
+    var d = migrateRecord(raw) || raw;
     var f = $("editor-form");
     if (!f || !d) return;
     var map = [
@@ -170,8 +189,8 @@
       ["inp-tagline", d.tagline],
       ["inp-email", d.email],
       ["inp-email-label", d.emailLabel],
-      ["inp-linkedin", d.linkedinUrl],
-      ["inp-linkedin-label", d.linkedinLabel],
+      ["inp-phone", d.phone],
+      ["inp-phone-label", d.phoneLabel],
       ["inp-location", d.location],
       ["inp-summary", d.summary],
       ["inp-exp1-title", d.exp1Title],
@@ -206,14 +225,15 @@
     var b1 = bullets("inp-exp1-bullets");
     var b2 = bullets("inp-exp2-bullets");
     return {
-      v: 1,
-      displayName: val("inp-display-name") || "Shashikanth",
-      pageTitle: val("inp-page-title") || (val("inp-display-name") || "Shashikanth") + " — Resume",
+      v: 2,
+      displayName: val("inp-display-name") || "Minumula Shashikanth",
+      pageTitle:
+        val("inp-page-title") || (val("inp-display-name") || "Minumula Shashikanth") + " — Resume",
       tagline: val("inp-tagline"),
       email: val("inp-email"),
       emailLabel: val("inp-email-label") || val("inp-email"),
-      linkedinUrl: val("inp-linkedin"),
-      linkedinLabel: val("inp-linkedin-label") || "LinkedIn",
+      phone: val("inp-phone"),
+      phoneLabel: val("inp-phone-label") || val("inp-phone"),
       location: val("inp-location"),
       summary: val("inp-summary"),
       exp1Title: val("inp-exp1-title"),
@@ -270,6 +290,7 @@
     if (clearBtn) {
       clearBtn.addEventListener("click", function () {
         localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem("resumeTextOverridesV1");
         setEditorStatus("Cleared. Reloading…");
         window.setTimeout(function () {
           window.location.reload();
